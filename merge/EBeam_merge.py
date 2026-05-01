@@ -150,6 +150,13 @@ for f in [f for f in files_in if '.oas' in f[-4:].lower() or '.gds' in f[-4:].lo
     layout2 = pya.Layout()
     layout2.read(f)
 
+    # Remove KLayout's $$$CONTEXT_INFO$$$ metadata cell if present; it appears
+    # as an unreferenced top cell in GDS files saved by KLayout and would cause
+    # num_top_cells > 1, which skips the real design cell during merging.
+    for c in list(layout2.top_cells()):
+        if c.name == '$$$CONTEXT_INFO$$$':
+            layout2.delete_cell(c.cell_index())
+
     if 'elec413' in basefilename.lower():
         course = 'ELEC413'
     elif 'openebl' in basefilename.lower():
