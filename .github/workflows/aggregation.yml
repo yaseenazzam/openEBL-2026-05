@@ -153,7 +153,7 @@ jobs:
           fi
 
           git commit -m "Aggregation layout: $ARTIFACT_URL"
-          git push -u origin "$BRANCH"
+          git push -u origin "$BRANCH" --force
         if: env.TRIGGER_INFO != 'pull request' && github.repository_owner == 'SiEPIC'
 
       - name: Create or update Pull Request
