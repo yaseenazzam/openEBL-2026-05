@@ -133,7 +133,7 @@ jobs:
         if: env.TRIGGER_INFO != 'pull request'
 
 
-            - name: Commit changes to a branch
+      - name: Commit changes to a branch
         run: |
           set -e
 
